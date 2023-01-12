@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
 from apps.category.models import Category
 
 def blog_image_directory(instance, filename):
@@ -10,10 +9,10 @@ def blog_image_directory(instance, filename):
 class Post(models.Model):
     title =         models.CharField(max_length=255)
     slug =          models.SlugField(max_length=255, unique=True)
-    thumbnail =     models.ImageField(upload_to=blog_image_directory)
+    thumbnail =     models.ImageField(upload_to=blog_image_directory, max_length=500)
 
     description =   models.TextField(max_length=255)
-    content =       RichTextUploadingField()
+    content =       RichTextField()
 
     time_read =     models.IntegerField()
 
